@@ -10,6 +10,7 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {Location} from 'expo-location';
 
@@ -18,6 +19,8 @@ import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import MapView, {Callout, Circle, Marker} from 'react-native-maps';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
   const [pin, setPin] = useState({
     latitude: 37.78825,
     longitude: -122.4324,

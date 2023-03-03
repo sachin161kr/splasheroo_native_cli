@@ -1,35 +1,40 @@
-import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Provider as PaperProvider } from "react-native-paper";
-import { AuthProvider } from "./context/AuthContext";
-import Signup from "./screens/Signup";
-import { TailwindProvider } from "tailwindcss-react-native";
+import {StatusBar} from 'expo-status-bar';
+import {Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Provider as PaperProvider} from 'react-native-paper';
+import {AuthProvider} from './context/AuthContext';
+import Signup from './screens/Signup';
+import {TailwindProvider} from 'tailwindcss-react-native';
 
-import DrawerNavigation from "./navigation/DrawerNavigation";
-import StepForm from "./screens/StepForm";
-import PickDate from "./screens/PickDate";
-import SelectService from "./screens/SelectService";
-import LoginScreen from "./screens/LoginScreen";
-import HomeScreen from "./screens/HomeScreen";
+import DrawerNavigation from './navigation/DrawerNavigation';
+import StepForm from './screens/StepForm';
+import PickDate from './screens/PickDate';
+import SelectService from './screens/SelectService';
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
+import MainStackNavigator from './navigation/StackNavigator';
+
+import Mydrawer from './navigation/drawer';
 
 export default function App() {
   return (
     <AuthProvider>
       <PaperProvider>
         <TailwindProvider>
-          <NavigationContainer>
-            {/* <DrawerNavigation /> */}
-            <Stack.Navigator>
+          <Mydrawer />
+          {/* <NavigationContainer> */}
+          {/* <DrawerNavigation /> */}
+          {/* <MainStackNavigator /> */}
+          {/* <Stack.Navigator>
                 <Stack.Screen name="LoginScreen" component={LoginScreen} />
                 <Stack.Screen name="homeScreen" component={HomeScreen} />
-             </Stack.Navigator>
-          </NavigationContainer>
-          </TailwindProvider>
+             </Stack.Navigator> */}
+          {/* </NavigationContainer> */}
+        </TailwindProvider>
       </PaperProvider>
     </AuthProvider>
   );
@@ -44,7 +49,6 @@ export default function App() {
 // jack@gmail.com
 // Jack@123
 
-
 // For booking:{
 //   userId:'33434'
 //   latitude: 232.3232,
@@ -58,6 +62,5 @@ export default function App() {
 //   time:'9:00 - 10:00',
 //   service:ObjectId('2323232'),
 // }
-
 
 // kemeh20779@ekcsoft.com
