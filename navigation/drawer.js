@@ -4,6 +4,10 @@ import 'react-native-gesture-handler';
 
 import * as React from 'react';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {useNavigation} from '@react-navigation/native';
+
 import {
   Image,
   Text,
@@ -21,7 +25,15 @@ import accountIcon from '../assets/account.png';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItem,
+} from '@react-navigation/drawer';
+
+import logo from '../assets/logo.png';
+
+import terms from '../assets/Terms.png';
 
 import HomeScreen from '../screens/HomeScreen';
 import Bookings from '../screens/Bookings';
@@ -40,6 +52,15 @@ import ChooseVehicleScreen from '../screens/ChooseVehicle';
 
 import AddVehicle from '../screens/AddVehicle';
 
+import {createNavigationContainerRef} from '@react-navigation/native';
+const navigationRef = createNavigationContainerRef();
+
+function navigate(name) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name);
+  }
+}
+
 import menuIcon from '../assets/menu.png';
 
 import PickDate from '../screens/PickDate';
@@ -52,7 +73,7 @@ import SuccessBooking from '../screens/SuccessBooking';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-import {useNavigation, DrawerActions} from '@react-navigation/native';
+import {DrawerActions} from '@react-navigation/native';
 
 const FirstScreenStack = () => {
   const navigation = useNavigation();
@@ -255,9 +276,9 @@ const FirstScreenStack = () => {
 const SecondScreenStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="SecondPage"
+      initialRouteName="booking"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="SecondPage" component={Bookings} />
+      <Stack.Screen name="booking" component={Bookings} />
     </Stack.Navigator>
   );
 };
@@ -265,9 +286,9 @@ const SecondScreenStack = () => {
 const ThirdScreenStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="ThirdPage"
+      initialRouteName="GetVehincle"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="ThirdPage" component={AddVehicle} />
+      <Stack.Screen name="GetVehincle" component={GetVehicle} />
     </Stack.Navigator>
   );
 };
@@ -275,111 +296,350 @@ const ThirdScreenStack = () => {
 const FourthScreenStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="FourthPage"
+      initialRouteName="account"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="FourthPage" component={AccountDetails} />
+      <Stack.Screen name="account" component={AccountDetails} />
     </Stack.Navigator>
   );
 };
 
+let map = {
+  home: true,
+  booking: false,
+  GetVehicle: false,
+  account: false,
+};
+
+function changeSelect() {
+  map['home'] = false;
+  map['booking'] = false;
+  map['GetVehicle'] = false;
+  map['account'] = false;
+
+  // console.log(map);
+}
+
 function Mydrawer() {
+  const navigation = useNavigation();
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('userToken');
+    await AsyncStorage.removeItem('userId');
+    await AsyncStorage.removeItem('userEmail');
+    navigation.navigate('login');
+    // navigationRef.navigate('login');
+  };
+
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        screenOptions={{
-          drawerStyle: {
-            backgroundColor: '#FFFFFF', //Set Drawer background
-            width: 250, //Set Drawer width
+    <Drawer.Navigator
+      initialRouteName="home"
+      drawerContent={() => {
+        return (
+          <>
+            <Image
+              source={logo}
+              style={{
+                //marginHorizontal: 30,
+                alignSelf: 'center',
+                marginTop: 30,
+                height: 200,
+                width: 200,
+              }}
+            />
+            <Text
+              style={{
+                color: '#00BCD4',
+                fontSize: 20,
+                textAlign: 'center',
+                fontWeight: '900',
+              }}>
+              SLASHEROO
+            </Text>
+            <DrawerContentScrollView>
+              <DrawerItem
+                label="Home"
+                icon={() => {
+                  return (
+                    <Image
+                      source={homeIcon}
+                      style={{
+                        height: 25,
+                        width: 25,
+                      }}
+                    />
+                  );
+                }}
+                pressColor="#E2EDF6"
+                onPress={() => {
+                  changeSelect();
+                  map['home'] = true;
+                  console.log('home');
+                  navigation.navigate('homeScreen');
+                }}
+                style={{
+                  backgroundColor: map['home'] == true ? '#E2EDF6' : '#FFF',
+                  borderRadius: 30,
+                  padding: 8,
+                  paddingLeft: 12,
+                }}
+              />
+              <DrawerItem
+                label="Bookings"
+                icon={() => {
+                  return (
+                    <Image
+                      source={bookingIcon}
+                      style={{
+                        height: 25,
+                        width: 25,
+                      }}
+                    />
+                  );
+                }}
+                onPress={() => {
+                  changeSelect();
+                  map['booking'] = true;
+                  navigation.navigate('Bookings');
+                  //console.log(map);
+                }}
+                pressColor="#E2EDF6"
+                style={{
+                  backgroundColor: map['booking'] == true ? '#E2EDF6' : '#FFF',
+                  borderRadius: 30,
+                  padding: 8,
+                  paddingLeft: 12,
+                }}
+              />
+              <DrawerItem
+                label="Choose Vehicle"
+                icon={() => {
+                  return (
+                    <Image
+                      source={carIcon}
+                      style={{
+                        height: 25,
+                        width: 25,
+                      }}
+                    />
+                  );
+                }}
+                onPress={() => {
+                  changeSelect();
+                  map['GetVehicle'] = true;
+                  navigation.navigate('Vehicles');
+                  //console.log("GetVehicle");
+                }}
+                pressColor="#E2EDF6"
+                style={{
+                  backgroundColor:
+                    map['GetVehicle'] == true ? '#E2EDF6' : '#FFF',
+                  borderRadius: 30,
+                  padding: 8,
+                }}
+              />
+              <DrawerItem
+                label="Account"
+                icon={() => {
+                  return (
+                    <Image
+                      source={accountIcon}
+                      style={{
+                        height: 25,
+                        width: 25,
+                      }}
+                    />
+                  );
+                }}
+                onPress={() => {
+                  changeSelect();
+                  map['account'] = true;
+                  navigation.navigate('Account');
+                  //console.log("account");
+                }}
+                pressColor="#E2EDF6"
+                style={{
+                  backgroundColor: map['account'] == true ? '#E2EDF6' : '#FFF',
+                  borderRadius: 30,
+                  padding: 8,
+                }}
+              />
+            </DrawerContentScrollView>
+            <TouchableOpacity
+              onPress={handleLogout}
+              style={{
+                marginHorizontal: 20,
+                height: 40,
+                borderRadius: 20,
+                marginBottom: 30,
+                backgroundColor: '#00BCD4',
+              }}>
+              <Text style={{color: '#FFF', textAlign: 'center', marginTop: 8}}>
+                Log Out
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                // Linking.openURL("https://www.google.com");
+                Linking.canOpenURL(
+                  'https://splasheroo.co.uk/terms-and-conditions.html',
+                ).then(supported => {
+                  if (supported) {
+                    Linking.openURL(
+                      'https://splasheroo.co.uk/terms-and-conditions.html',
+                    );
+                  } else {
+                    console.log(supported);
+                    Alert.alert('Something went wrong!!');
+                  }
+                });
+              }}
+              style={{
+                height: 40,
+                // alignSelf: "center",
+                // justifyContent:"space-around"
+                marginLeft: 25,
+                flexDirection: 'row',
+                marginBottom: 30,
+              }}>
+              <Image
+                source={terms}
+                style={{
+                  height: 25,
+                  width: 25,
+                  marginTop: 8,
+                }}
+              />
+              <Text
+                style={{
+                  fontWeight: '300',
+                  color: '#000',
+                  textAlign: 'center',
+                  marginTop: 9,
+                  marginLeft: 10,
+                }}>
+                Terms And Conditions
+              </Text>
+            </TouchableOpacity>
+          </>
+        );
+      }}
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: '#FFFFFF', //Set Drawer background
+          width: 250, //Set Drawer width
+        },
+        headerStyle: {
+          backgroundColor: '#f4511e', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+        header: () => {
+          return (
+            <>
+              <Image
+                source={logo}
+                style={{
+                  //marginHorizontal: 30,
+                  alignSelf: 'center',
+                  marginTop: 30,
+                  height: 200,
+                  width: 200,
+                }}
+              />
+              <Text
+                style={{
+                  color: '#00BCD4',
+                  fontSize: 20,
+                  textAlign: 'center',
+                  fontWeight: '900',
+                }}>
+                SLASHEROO
+              </Text>
+            </>
+          );
+        },
+      }}>
+      <Drawer.Screen
+        name="home"
+        options={{
+          drawerLabel: 'Home',
+          title: 'First Stack',
+          headerShown: false,
+          drawerIcon: () => {
+            return (
+              <Image
+                source={homeIcon}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
           },
-          headerStyle: {
-            backgroundColor: '#f4511e', //Set Header color
+        }}
+        component={FirstScreenStack}
+      />
+      <Drawer.Screen
+        name="booking"
+        options={{
+          drawerLabel: 'Bookings',
+          title: 'Second Stack',
+          drawerIcon: () => {
+            return (
+              <Image
+                source={bookingIcon}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
           },
-          headerTintColor: '#fff', //Set Header text color
-          headerTitleStyle: {
-            fontWeight: 'bold', //Set Header text style
+        }}
+        component={SecondScreenStack}
+      />
+      <Drawer.Screen
+        name="GetVehicle"
+        options={{
+          drawerLabel: 'Vehicles',
+          title: 'Third Stack',
+          headerShown: false,
+          drawerIcon: () => {
+            return (
+              <Image
+                source={carIcon}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
           },
-        }}>
-        <Drawer.Screen
-          name="FirstPage"
-          options={{
-            drawerLabel: 'Home',
-            title: 'First Stack',
-            headerShown: false,
-            drawerIcon: () => {
-              return (
-                <Image
-                  source={homeIcon}
-                  style={{
-                    height: 20,
-                    width: 20,
-                  }}
-                />
-              );
-            },
-          }}
-          component={FirstScreenStack}
-        />
-        <Drawer.Screen
-          name="SecondPage"
-          options={{
-            drawerLabel: 'Bookings',
-            title: 'Second Stack',
-            drawerIcon: () => {
-              return (
-                <Image
-                  source={bookingIcon}
-                  style={{
-                    height: 20,
-                    width: 20,
-                  }}
-                />
-              );
-            },
-          }}
-          component={SecondScreenStack}
-        />
-        <Drawer.Screen
-          name="ThirdPage"
-          options={{
-            drawerLabel: 'Vehicles',
-            title: 'Third Stack',
-            headerShown: false,
-            drawerIcon: () => {
-              return (
-                <Image
-                  source={carIcon}
-                  style={{
-                    height: 20,
-                    width: 20,
-                  }}
-                />
-              );
-            },
-          }}
-          component={ThirdScreenStack}
-        />
-        <Drawer.Screen
-          name="FourthPage"
-          options={{
-            drawerLabel: 'Account',
-            title: 'Fourth Stack',
-            headerShown: false,
-            drawerIcon: () => {
-              return (
-                <Image
-                  source={accountIcon}
-                  style={{
-                    height: 20,
-                    width: 20,
-                  }}
-                />
-              );
-            },
-          }}
-          component={FourthScreenStack}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
+        }}
+        component={ThirdScreenStack}
+      />
+      <Drawer.Screen
+        name="account"
+        options={{
+          drawerLabel: 'Account',
+          title: 'Fourth Stack',
+          headerShown: false,
+          drawerIcon: () => {
+            return (
+              <Image
+                source={accountIcon}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
+          },
+        }}
+        component={FourthScreenStack}
+      />
+    </Drawer.Navigator>
   );
 }
 

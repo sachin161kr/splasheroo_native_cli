@@ -25,15 +25,9 @@ export default function App() {
     <AuthProvider>
       <PaperProvider>
         <TailwindProvider>
-          <Mydrawer />
-          {/* <NavigationContainer> */}
-          {/* <DrawerNavigation /> */}
-          {/* <MainStackNavigator /> */}
-          {/* <Stack.Navigator>
-                <Stack.Screen name="LoginScreen" component={LoginScreen} />
-                <Stack.Screen name="homeScreen" component={HomeScreen} />
-             </Stack.Navigator> */}
-          {/* </NavigationContainer> */}
+          <NavigationContainer>
+            <Mydrawer />
+          </NavigationContainer>
         </TailwindProvider>
       </PaperProvider>
     </AuthProvider>
