@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import GetLocation from 'react-native-get-location';
 
@@ -9,23 +9,31 @@ import {
   ScrollView,
   View,
   ActivityIndicator,
+  BackHandler
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import {Button} from "react-native-paper";
 
-import {Location} from 'expo-location';
-
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-
-import MapView, {Callout, Circle, Marker} from 'react-native-maps';
+import { AuthContext } from "../context/AuthContext";
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import MapView, { Callout, Circle, Marker } from 'react-native-maps';
+import { mapPin,Mercedes } from "../assets";
+import BookingCards from '../components/BookingCards'
+import axios from "axios";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const { setBookingDetails, bookingDetails, renderBookingInfo } = useContext(AuthContext)
 
   const [pin, setPin] = useState({
     latitude: 37.78825,
     longitude: -122.4324,
   });
 
+  const [upcomingBooking, setUpComingBooking] = useState();
+  const [userAddress, setUserAddress] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [delta, setDelta] = useState({
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
@@ -35,6 +43,30 @@ const HomeScreen = () => {
   const [errorMsg, setErrorMsg] = useState(null);
 
   const [found, setFound] = useState(true);
+
+  const loadData = async () => {
+    setIsLoading(true);
+    const value = await AsyncStorage.getItem('userId')
+    const options = {
+      method: "GET",
+      url: `https://splasheroo-backend.herokuapp.com/api/booking/latest/${value}`,
+      params: {},
+      headers: {
+        "content-type": "application/json",
+      }
+    };
+
+    axios
+      .request(options)
+      .then((response) => {
+        setUpComingBooking(response.data.fullTasks[0]);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  }
 
   useEffect(() => {
     GetLocation.getCurrentPosition({
@@ -49,10 +81,35 @@ const HomeScreen = () => {
         });
       })
       .catch(error => {
-        const {code, message} = error;
+        const { code, message } = error;
         console.warn(code, message);
       });
   }, []);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        navigation.navigate("homeScreen");
+        return true;
+      }
+    );
+    return () => backHandler.remove();
+  }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [renderBookingInfo])
+
+  const handleCofirmLocation = () => {
+    setBookingDetails({
+      ...bookingDetails,
+      latitude: pin.latitude,
+      longitude: pin.longitude,
+      address: userAddress
+    })
+    navigation.navigate("ConfirmLocationScreen");
+  }
 
   return (
     <>
@@ -73,7 +130,7 @@ const HomeScreen = () => {
           },
         }}
         onPress={(data, details = null) => {
-          console.log(details);
+          setUserAddress(data.description)
           setPin({
             latitude: details?.geometry?.location.lat,
             longitude: details?.geometry?.location.lng,
@@ -84,7 +141,7 @@ const HomeScreen = () => {
           language: 'en',
         }}
       />
-      <ScrollView style={{backgroundColor: '#FFFFFF'}}>
+      <ScrollView style={{ backgroundColor: '#FFFFFF' }}>
         <View style={styles.mapView}>
           {found === true ? (
             <MapView
@@ -96,18 +153,20 @@ const HomeScreen = () => {
               }}
               style={styles.map}>
               <Marker
-                coordinate={pin}
-                draggable={true}
-                onDragStart={e => {
-                  console.log('Dragstart', e.nativeEvent.coordinate);
-                }}
-                onDragEnd={e => {
-                  setPin({
-                    latitude: e.nativeEvent.coordinate.latitude,
-                    longitude: e.nativeEvent.coordinate.longitude,
-                  });
-                  console.log(pin);
-                }}>
+                 coordinate={pin}
+                 draggable={true}
+                 onDragStart={(e) => {
+                   console.log("Dragstart", e.nativeEvent.coordinate);
+                 }}
+                 image={mapPin}
+                 onDragEnd={(e) => {
+                   setPin({
+                     latitude: e.nativeEvent.coordinate.latitude,
+                     longitude: e.nativeEvent.coordinate.longitude,
+                   });
+                   console.log(pin);
+                 }}
+                >
                 <Callout>
                   <Text>Your Vehicle!</Text>
                 </Callout>
@@ -115,7 +174,7 @@ const HomeScreen = () => {
             </MapView>
           ) : (
             <ActivityIndicator
-              style={{marginTop: 200}}
+              style={{ marginTop: 200 }}
               color="red"
               size={'large'}
             />
@@ -123,58 +182,84 @@ const HomeScreen = () => {
         </View>
         <View
           style={{
-            width: '100%',
+            width: "100%",
             height: 400,
-            backgroundColor: 'white',
-          }}></View>
+            backgroundColor: "white",
+          }}
+        ></View>
         <View
           style={{
             height: 300,
-            width: '100%',
-            position: 'absolute',
+            width: "100%",
+            position: "absolute",
 
-            backgroundColor: 'white',
+            backgroundColor: "white",
             //margin: 10,
-            alignSelf: 'center',
+            alignSelf: "center",
             elevation: 5,
             borderRadius: 10,
-            top: 550,
+            top: 450,
             paddingTop: 10,
             borderTopStartRadius: 20,
             borderTopEndRadius: 20,
             //left: 20,
-          }}>
+          }}
+        >
           <View
             style={{
               marginTop: 10,
               width: 50,
               borderWidth: 1,
-              borderColor: '#9B9B9B',
+              borderColor: "#9B9B9B",
               height: 5,
               borderRadius: 10,
               marginBottom: 20,
-              alignSelf: 'center',
-            }}></View>
+              alignSelf: "center",
+            }}
+          ></View>
           <View>
-            <Text style={{marginHorizontal: 20, fontSize: 16, marginTop: 10}}>
+            {
+              upcomingBooking ?
+                <>
+                  <Text style={{
+                    fontSize: 12,
+                    marginLeft: 20,
+                    color: "#707070"
+                  }}>UPCOMING</Text>
+                  <BookingCards upcomingBooking={upcomingBooking} image={Mercedes} />
+                  {/* <Text style={{
+                  fontSize:12,
+                  marginRight: 20,
+                  color:"#055ED0",
+                  textAlign:"right"
+                }}
+                onPress={() => navigation.navigate("Bookings")}
+                >View all bookings</Text> */}
+                </>
+                : null
+            }
+          </View>
+          <View>
+            <Text style={{ marginHorizontal: 20, fontSize: 16, marginTop: 10 }}>
               Where's your Vehicle?
             </Text>
-            <Text style={{padding: 20}}>
+            <Text style={{ padding: 20 }}>
               Hold and Move the pin to highlight the correct location of your
               car - it really helps!
             </Text>
           </View>
           <View>
-            <TouchableOpacity
+            <Button
               style={{
                 marginHorizontal: 10,
                 marginTop: 10,
               }}
-              onPress={() => {
-                navigation.navigate('ConfirmLocationScreen');
-              }}>
-              <Text>Submit</Text>
-            </TouchableOpacity>
+              onPress={handleCofirmLocation}
+              className="bg-[#00BCD4]"
+              mode="contained"
+            >
+              Submit
+            </Button>
           </View>
         </View>
       </ScrollView>

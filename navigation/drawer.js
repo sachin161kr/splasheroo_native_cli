@@ -74,6 +74,7 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 import {DrawerActions} from '@react-navigation/native';
+import AddHomeVehicle from '../screens/AddHomeVehicle';
 
 const FirstScreenStack = () => {
   const navigation = useNavigation();
@@ -132,6 +133,13 @@ const FirstScreenStack = () => {
       <Stack.Screen
         name="addCustomVehicle"
         component={AddCustomVehicle}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="addHomeVehicle"
+        component={AddHomeVehicle}
         options={{
           headerShown: false,
         }}
@@ -463,7 +471,7 @@ function Mydrawer() {
                 }}
               />
             </DrawerContentScrollView>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={handleLogout}
               style={{
                 marginHorizontal: 20,
@@ -475,7 +483,7 @@ function Mydrawer() {
               <Text style={{color: '#FFF', textAlign: 'center', marginTop: 8}}>
                 Log Out
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity
               onPress={() => {
                 // Linking.openURL("https://www.google.com");

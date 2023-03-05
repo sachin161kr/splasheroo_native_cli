@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, ActivityIndicator,Image } from 'react-native'
 import React, { useLayoutEffect, useState, useContext, useEffect } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from 'react-native-vector-icons';
@@ -6,6 +6,8 @@ import { Button } from "react-native-paper";
 import { AuthContext } from '../context/AuthContext';
 import { Ionicons } from 'react-native-vector-icons';
 import axios from "axios";
+import {back} from "../assets";
+
 
 const SelectService = () => {
     const navigation = useNavigation();
@@ -70,7 +72,7 @@ const SelectService = () => {
             <View className="p-4 bg-white h-full">
                 <View className="flex-row items-center px-4">
                     <Text onPress={handlePrevios}>
-                        <Ionicons name="arrow-back" size={24} color="black" />
+                     <Image source={back}/>
                     </Text>
                     <Text className="text-2xl ml-10 text-center">Select your service</Text>
                 </View>
@@ -89,7 +91,7 @@ const SelectService = () => {
                                 <Text className="text-lg mb-2">{item.serviceName}</Text>
                                 {item.allService.map((services) =>
                                     <View key={services} className="flex-row">
-                                        <MaterialIcons name="done" size={17} color="black" />
+                                        {/* <MaterialIcons name="done" size={17} color="black" /> */}
                                         <Text className="text-[#707070] ml-1">{services}</Text>
                                     </View>
                                 )}

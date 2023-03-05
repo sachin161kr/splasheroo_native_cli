@@ -8,7 +8,8 @@ import BookingCards from '../components/BookingCards'
 import { Button, TextInput, Avatar } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { AntDesign } from 'react-native-vector-icons';
+// import { AntDesign } from 'react-native-vector-icons';
+import {card} from "../assets"
 
 const AccountDetails = () => {
     const navigation = useNavigation();
@@ -63,6 +64,7 @@ const AccountDetails = () => {
             })
             .catch((error) => {
                 console.error(error);
+                setIsLoading(false);
             });
     }
 
@@ -85,8 +87,15 @@ const AccountDetails = () => {
         navigation.navigate("login");
       };
 
+    const handleDelete = async () => {
+        await AsyncStorage.removeItem("userToken");
+        AsyncStorage.removeItem('userId');
+        AsyncStorage.removeItem('userEmail');
+        navigation.navigate("login");
+      };
+
     return (
-        <ScrollView className="px-3 h-full w-full bg-white">
+        <ScrollView className="h-full w-full bg-white">
             {isLoading ? <ActivityIndicator
                 style={{ marginTop: 200 }}
                 color="#0B646B"
@@ -132,12 +141,13 @@ const AccountDetails = () => {
                             />
                         </View>
                         {cardBrand && 
-                        <>
+                        <View className="px-3">
                         <Text className="mt-5 text-[17px] mb-2">Your Card</Text>
                         <TouchableOpacity className="bg-[#E5FCFF] rounded-2xl mt-3 px-3">
                             <View className="flex-row justify-center items-center p-4">
                                 <View style={{ width: 50 }}>
-                                    <AntDesign name="creditcard" size={50} color="black" />
+                                    {/* <AntDesign name="creditcard" size={50} color="black" /> */}
+                                    <Image source={card} />
                                 </View>
                                 <View style={{ flex: 1, marginLeft: 20 }}>
                                     <Text>{cardBrand}</Text>
@@ -145,11 +155,14 @@ const AccountDetails = () => {
                                 </View>
                             </View>
                         </TouchableOpacity> 
-                        </>}
+                        </View>}
                     </View>
-                    <View className="px-4 mt-10">
-                        <Button className="bg-[#00BCD4]" mode="contained"  onPress={handleLogout}>
-                            Log Out
+                    <View className="flex-row mt-5 justify-evenly w-100">
+                        <Button className="bg-[#00BCD4] px-4" mode="contained"  onPress={handleLogout}>
+                            Sign out
+                        </Button>
+                        <Button className="bg-[#F77B72]" mode="contained"  onPress={handleDelete}>
+                           Delete Account
                         </Button>
                     </View>
                 </>

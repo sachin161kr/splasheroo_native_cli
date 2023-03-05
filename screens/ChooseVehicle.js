@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Mercedes, Edit, Toyota, Tesla } from "../assets";
 import { AuthContext } from '../context/AuthContext';
 import axios from "axios";
+import {back} from "../assets";
 import { Ionicons } from 'react-native-vector-icons';
 
 import styles from "./StyleScreen";
@@ -83,7 +84,8 @@ function ChooseVehicleScreen() {
       <SafeAreaView className="h-full bg-white">
         <View className="flex-row items-center px-4">
           <Text onPress={handlePrevios}>
-            <Ionicons name="arrow-back" size={24} color="black" />
+            {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
+              <Image source={back}/>
           </Text>
           <Text className="text-2xl ml-20 text-center">Choose vehicle</Text>
         </View>
@@ -108,6 +110,9 @@ function ChooseVehicleScreen() {
           <View className="mt-5">
             <Text
               onPress={() => {
+                const data = {
+                  route:"addBooking"
+                }
                 navigation.navigate("addCustomVehicle");
               }}
               style={{ textAlign: "center", color: "#055ED0" }}

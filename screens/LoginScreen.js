@@ -123,7 +123,6 @@ const LoginScreen = () => {
                     </View>
 
                 </View>}
-                <Ionicons name="arrow-back" size={24} color="black" />
         </SafeAreaView>
         </TouchableWithoutFeedback>
     )

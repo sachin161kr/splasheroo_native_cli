@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView,TouchableWithoutFeedback,Keyboard } from 'react-native'
+import { View, Text, SafeAreaView,TouchableWithoutFeedback,Keyboard,Image } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState,useContext } from 'react'
 import { ProgressBar, MD3Colors, TextInput, Button, Checkbox } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,8 +9,9 @@ import Password from "../components/SignupForm/Password";
 import PhoneNumber from "../components/SignupForm/PhoneNumber";
 import PostCode from "../components/SignupForm/PostCode";
 import CheckBox from "../components/CheckBox";
-import { Ionicons } from 'react-native-vector-icons';
+// import { Ionicons } from 'react-native-vector-icons';
 import { AuthContext } from '../context/AuthContext';
+import {back} from "../assets";
 import axios from "axios";
 
 
@@ -157,8 +158,10 @@ const StepForm = () => {
         <SafeAreaView className="px-4 mt-5 h-full w-full relative">
             <View className="flex-row px-4 items-center">
                 {selectScreen > 0 && <Text onPress={handlePrevios}>
-                <Ionicons name="arrow-back" size={24} color="black" />
-                    </Text>}
+                {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
+                    <Image source={back}/>
+                </Text>
+                }
                 <Text className={selectScreen > 0 ? "text-lg ml-20 text-center" : "text-lg ml-20 px-9"}>
                     Create Account
                 </Text>

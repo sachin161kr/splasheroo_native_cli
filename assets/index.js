@@ -8,3 +8,7 @@ export {default as BottomBg} from './bg.png';
 export {default as circle} from './circle.png';
 export {default as terms} from './Terms.png';
 export {default as mapPin} from "./pin.png";
+export {default as back} from "./arrow_back.png";
+export {default as checkbox} from "./checkboxes.png";
+export {default as checked} from "./checked.png";
+export {default as card} from "./cards.png";

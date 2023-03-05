@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback,Keyboard,ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback,Keyboard,ScrollView,Image } from 'react-native'
 import React, { useLayoutEffect, useState, useContext, useEffect } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { Button, TextInput, Avatar, ProgressBar } from "react-native-paper";
@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from 'moment'
 import { Ionicons } from 'react-native-vector-icons';
+import {back} from "../assets";
 import axios from "axios";
 
 const Summary = ({ route }) => {
@@ -173,7 +174,8 @@ const Summary = ({ route }) => {
             <View className="px-4 bg-white h-full">
                 <View className="flex-row items-center px-4 mt-0">
                     <Text onPress={handlePrevios}>
-                        <Ionicons name="arrow-back" size={24} color="black" />
+                        {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
+                        <Image source={back}/>
                     </Text>
                     <Text className="text-2xl ml-10 text-center">Review Summary</Text>
                 </View>

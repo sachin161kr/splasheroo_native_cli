@@ -1,4 +1,5 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View,Image} from 'react-native';
+import {checkbox,checked} from "../assets"
 import React from 'react';
 
 const CheckBox = props => {
@@ -9,10 +10,11 @@ const CheckBox = props => {
   return (
     <View className="flex-row px-4 mt-5 items-center">
       <Pressable onPress={props.onPress}>
+        {props.isChecked ?  <Image source={checked} /> : <Image source={checkbox}/>}
         {/* <MaterialCommunityIcons
 					name={iconName} size={24} color="#00BCD4" /> */}
       </Pressable>
-      <Text className="ml-2">{props.title}</Text>
+      <Text>{props.title}</Text>
     </View>
   );
 };

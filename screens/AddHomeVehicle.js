@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 import axios from "axios";
 import { back } from "../assets";
 
-const AddCustomVehicle = ({ route }) => {
+const AddHomeVehicle = ({ route }) => {
     const data = route?.params?.param
     const navigation = useNavigation();
     const { userInfo, setRenderFetchData, renderFetchData } = useContext(AuthContext)
@@ -58,7 +58,7 @@ const AddCustomVehicle = ({ route }) => {
             .request(options)
             .then((response) => {
                 if (response) {
-                    navigation.navigate("ChooseVehicleScreen")
+                    navigation.navigate("Vehicles")
                     setRenderFetchData(!renderFetchData);
                 }
             })
@@ -89,7 +89,7 @@ const AddCustomVehicle = ({ route }) => {
             .request(options)
             .then((response) => {
                 console.log(response.data);
-                navigation.navigate("ChooseVehicleScreen")
+                navigation.navigate("Vehicles")
                 setRenderFetchData(!renderFetchData);
             })
             .catch((error) => {
@@ -111,7 +111,7 @@ const AddCustomVehicle = ({ route }) => {
         }
     }, [data])
 
-    console.log(data,'data000')
+    console.log(data,'data')
 
 
     return (
@@ -121,9 +121,9 @@ const AddCustomVehicle = ({ route }) => {
                 Add your vehicle
             </Text> */}
                 <View className="flex-row px-4 items-center">
-                        <Text onPress={() => navigation.navigate("ChooseVehicleScreen")}>
+                     <Text onPress={() => navigation.navigate("Vehicles")}>
                             <Image source={back} />
-                        </Text>
+                    </Text>
                     <Text className="text-lg ml-20 text-center">
                         Add your custom vehicle
                     </Text>
@@ -193,4 +193,4 @@ const AddCustomVehicle = ({ route }) => {
     )
 }
 
-export default AddCustomVehicle
+export default AddHomeVehicle

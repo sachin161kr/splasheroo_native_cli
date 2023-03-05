@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, ActivityIndicator,Image } from 'react-native'
 import React, { useLayoutEffect, useState, useContext, useEffect } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
@@ -6,6 +6,7 @@ import CalendarPicker from 'react-native-calendar-picker';
 import { AuthContext } from '../context/AuthContext';
 import { Ionicons } from 'react-native-vector-icons';
 import moment from "moment-timezone";
+import {back} from "../assets";
 import axios from "axios";
 
 const PickDate = () => {
@@ -77,7 +78,8 @@ const PickDate = () => {
     <SafeAreaView className="bg-white h-full">
       <View className="flex-row items-center px-4">
         <Text onPress={handlePrevios}>
-          <Ionicons name="arrow-back" size={24} color="black" />
+          {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
+          <Image source={back}/>
         </Text>
         <Text className="text-2xl ml-20 text-center">Pick a date and time</Text>
       </View>

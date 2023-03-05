@@ -8,8 +8,9 @@ import { useNavigation } from "@react-navigation/native";
 import { Mercedes, Edit, Toyota, Tesla } from "../assets";
 import { AuthContext } from '../context/AuthContext';
 import axios from "axios";
-import { AntDesign } from 'react-native-vector-icons'; 
-import { Ionicons } from 'react-native-vector-icons';
+
+import {back,card} from "../assets";
+// import { Ionicons } from 'react-native-vector-icons';
 
 import styles from "./StyleScreen";
 
@@ -60,7 +61,8 @@ function SelectCard({ route }) {
       <SafeAreaView className="h-full bg-white">
         <View className="flex-row items-center px-4">
           <Text>
-            <Ionicons name="arrow-back" size={24} color="black" />
+            {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
+            <Image source={back}/>
           </Text>
           <Text className="text-2xl ml-20 text-center">Select Card</Text>
         </View>
@@ -68,7 +70,8 @@ function SelectCard({ route }) {
           <TouchableOpacity onPress={completePayment} className="bg-[#E5FCFF] rounded-2xl mt-3">
             <View className="flex-row justify-center items-center p-4">
               <View style={{ width: 50 }}>
-              <AntDesign name="creditcard" size={50} color="black" />
+              {/* <AntDesign name="creditcard" size={50} color="black" /> */}
+              <Image source={card} />
               </View>
               <View style={{ flex: 1, marginLeft: 20 }}>
                 <Text>{data.cardDetails.brand}</Text>

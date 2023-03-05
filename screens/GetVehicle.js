@@ -10,7 +10,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Mercedes, Edit, Toyota, Tesla } from "../assets";
 import { AuthContext } from '../context/AuthContext';
 import axios from "axios";
-import { Ionicons } from 'react-native-vector-icons';
+import {back} from "../assets";
+// import { Ionicons } from '@expo/vector-icons';
 
 const GetVehicle = () => {
     const navigation = useNavigation();
@@ -77,7 +78,7 @@ const GetVehicle = () => {
     //   }
     
       const handleEdit = (item) => {
-        navigation.navigate("addCustomVehicle", { param: item });
+        navigation.navigate("addHomeVehicle", { param: item });
       }
     
       const handleSelected = (item) => {
@@ -88,9 +89,6 @@ const GetVehicle = () => {
         getData();
       }, [renderFetchData])
     
-      const handlePrevios = () => {
-        navigation.navigate("ConfirmLocationScreen");
-      }
 
     return (
         <>
@@ -116,7 +114,7 @@ const GetVehicle = () => {
                     <View className="mt-5">
                         <Text
                             onPress={() => {
-                                navigation.navigate("addCustomVehicle");
+                              navigation.navigate("addHomeVehicle");
                             }}
                             style={{ textAlign: "center", color: "#055ED0" }}
                         >
