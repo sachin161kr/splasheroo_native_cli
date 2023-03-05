@@ -531,6 +531,7 @@ function Mydrawer() {
         );
       }}
       screenOptions={{
+        swipeEdgeWidth: 0,
         drawerStyle: {
           backgroundColor: '#FFFFFF', //Set Drawer background
           width: 250, //Set Drawer width
