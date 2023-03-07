@@ -97,10 +97,10 @@ const FirstScreenStack = () => {
       />
       <Stack.Screen
         name="ConfirmLocationScreen"
-        component={ConfirmLocationScreen}
         options={{
-          headerShown: false,
+          headerTitle: 'Confirm Location',
         }}
+        component={ConfirmLocationScreen}
       />
       <Stack.Screen
         name="stepForm"
@@ -261,7 +261,13 @@ const FirstScreenStack = () => {
           },
         }}
       />
-      <Stack.Screen name="pickdate" component={PickDate} />
+      <Stack.Screen
+        name="pickdate"
+        component={PickDate}
+        options={{
+          headerTitle: 'Pick a date and time',
+        }}
+      />
       <Stack.Screen name="SelectService" component={SelectService} />
       <Stack.Screen name="summary" component={Summary} />
       <Stack.Screen name="cardDetail" component={CardDetail} />

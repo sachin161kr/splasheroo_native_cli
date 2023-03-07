@@ -77,9 +77,9 @@ const ConfirmLocationScreen = () => {
                 <Text onPress={handlePrevios}>
                   {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
                 </Text>
-                <Text className="text-2xl ml-20 text-center">
+                {/* <Text className="text-2xl ml-20 text-center">
                   Confirm Location
-                </Text>
+                </Text> */}
               </View>
               <Text style={styles.text}>
                 Please let us know your exact address so we can collect the key!
