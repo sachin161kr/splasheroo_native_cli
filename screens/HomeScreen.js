@@ -131,6 +131,12 @@ const HomeScreen = () => {
           listView: {
             backgroundColor: 'white',
           },
+          textInput: {
+            color: '#000',
+          },
+          description: {
+            color: '#000',
+          },
         }}
         onPress={(data, details = null) => {
           setUserAddress(data.description);

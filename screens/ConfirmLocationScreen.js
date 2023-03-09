@@ -104,6 +104,18 @@ const ConfirmLocationScreen = () => {
                   </View>
                   <View className="mt-5 w-full">
                     <SelectList
+                      boxStyles={{
+                        borderColor: '#000',
+                      }}
+                      dropdownStyles={{
+                        borderColor: '#000',
+                      }}
+                      inputStyles={{
+                        color: '#000',
+                      }}
+                      dropdownTextStyles={{
+                        color: '#000',
+                      }}
                       setSelected={addr => handleSelect(addr)}
                       data={getAddress}
                       save="value"
