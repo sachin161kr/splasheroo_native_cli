@@ -54,7 +54,7 @@ const PostCode = ({formData, setFormData}) => {
           </View>
           <View>
             <TouchableOpacity
-              className="relative bottom-0 bg-[#00BCD4] border-none py-4 px-5 h-100 w-100"
+              className="relative bottom-0 bg-[#00BCD4] border-none py-4 px-5 h-100 w-100 mt-1 ml-2"
               mode="contained"
               onPress={handleSearch}>
               <Text className="text-white">Search</Text>
@@ -75,6 +75,18 @@ const PostCode = ({formData, setFormData}) => {
             // setSelected={(address) => {
             //     setFormData({...formData,address.toString()})
             // }}
+            boxStyles={{
+              borderColor: '#000',
+            }}
+            dropdownStyles={{
+              borderColor: '#000',
+            }}
+            inputStyles={{
+              color: '#000',
+            }}
+            dropdownTextStyles={{
+              color: '#000',
+            }}
             setSelected={addr => handleSelect(addr)}
             data={getAddress}
             save="value"

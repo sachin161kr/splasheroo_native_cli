@@ -30,7 +30,7 @@ const Signup = () => {
         </Button>
       </View>
       <View className="mt-10 px-4 flex-row justify-center align-items-center relative top-10">
-        <Text className="">Don’t have an account?</Text>
+        <Text className="text-black">Have an account?</Text>
         <Text
           onPress={() => {
             navigation.navigate('login');

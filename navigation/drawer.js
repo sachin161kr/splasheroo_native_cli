@@ -382,6 +382,9 @@ function Mydrawer() {
                   );
                 }}
                 pressColor="#E2EDF6"
+                labelStyle={{
+                  color: '#000',
+                }}
                 onPress={() => {
                   changeSelect();
                   map['home'] = true;
@@ -397,6 +400,9 @@ function Mydrawer() {
               />
               <DrawerItem
                 label="Bookings"
+                labelStyle={{
+                  color: '#000',
+                }}
                 icon={() => {
                   return (
                     <Image
@@ -424,6 +430,9 @@ function Mydrawer() {
               />
               <DrawerItem
                 label="Choose Vehicle"
+                labelStyle={{
+                  color: '#000',
+                }}
                 icon={() => {
                   return (
                     <Image
@@ -450,6 +459,9 @@ function Mydrawer() {
                 }}
               />
               <DrawerItem
+                labelStyle={{
+                  color: '#000',
+                }}
                 label="Account"
                 icon={() => {
                   return (
