@@ -190,20 +190,12 @@ const HomeScreen = () => {
           }}></View>
         <View
           style={{
-            height: 300,
             width: '100%',
             position: 'absolute',
-
             backgroundColor: 'white',
-            //margin: 10,
             alignSelf: 'center',
-            elevation: 5,
             borderRadius: 10,
             top: 450,
-            paddingTop: 10,
-            borderTopStartRadius: 20,
-            borderTopEndRadius: 20,
-            //left: 20,
           }}>
           <View
             style={{
@@ -223,7 +215,7 @@ const HomeScreen = () => {
                   style={{
                     fontSize: 12,
                     marginLeft: 20,
-                    color: '#707070',
+                    color: '#000',
                   }}>
                   UPCOMING
                 </Text>
@@ -231,22 +223,20 @@ const HomeScreen = () => {
                   upcomingBooking={upcomingBooking}
                   image={Mercedes}
                 />
-                {/* <Text style={{
-                  fontSize:12,
-                  marginRight: 20,
-                  color:"#055ED0",
-                  textAlign:"right"
-                }}
-                onPress={() => navigation.navigate("Bookings")}
-                >View all bookings</Text> */}
               </>
             ) : null}
           </View>
           <View>
-            <Text style={{marginHorizontal: 20, fontSize: 16, marginTop: 10}}>
+            <Text
+              style={{
+                marginHorizontal: 20,
+                fontSize: 16,
+                marginTop: 10,
+                color: '#000',
+              }}>
               Where's your Vehicle?
             </Text>
-            <Text style={{padding: 20}}>
+            <Text style={{padding: 20, color: '#000'}}>
               Hold and Move the pin to highlight the correct location of your
               car - it really helps!
             </Text>

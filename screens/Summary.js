@@ -189,43 +189,43 @@ const Summary = ({route}) => {
         <SafeAreaView className="bg-white h-full">
           <View className="px-4 bg-white h-full">
             <View className="flex-row items-center px-4 mt-0">
-              <Text onPress={handlePrevios}>
+              <Text className="text=black" onPress={handlePrevios}>
                 {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
                 <Image source={back} />
               </Text>
-              <Text className="text-2xl mt-3 ml-10 text-center">
+              <Text className="text-2xl mt-3 ml-10 text-center text-black">
                 Review Summary
               </Text>
             </View>
             <View className="flex-row mt-5 bg-[#F6FBFF] p-5 justify-between border-sm">
               <View>
-                <Text className="mt-1 color-[#707070]">Service</Text>
-                <Text className="mt-4 color-[#707070]">Date & Time</Text>
-                <Text className="mt-4 color-[#707070]">Duration</Text>
-                <Text className="mt-4 color-[#707070]">Address</Text>
-                <Text className="mt-4 color-[#707070]">Pincode</Text>
-                <Text className="mt-4 color-[#707070]">Reference</Text>
+                <Text className="mt-1 color-[#000000]">Service</Text>
+                <Text className="mt-4 color-[#000000]">Date & Time</Text>
+                <Text className="mt-4 color-[#000000]">Duration</Text>
+                <Text className="mt-4 color-[#000000]">Address</Text>
+                <Text className="mt-4 color-[#000000]">Pincode</Text>
+                <Text className="mt-4 color-[#000000]">Reference</Text>
               </View>
               <View>
-                <Text className="mt-1">{data?.serviceName}</Text>
-                <Text className="mt-4">
+                <Text className="mt-1 text-black">{data?.serviceName}</Text>
+                <Text className="mt-4 text-black">
                   {moment(bookingDetails.date).format('DD-MM-YYYY')}
                 </Text>
-                <Text className="mt-4">
+                <Text className="mt-4 text-black">
                   {bookingDetails.startTime}
                   {'-'}
                   {bookingDetails.endTime}
                 </Text>
-                <Text className="mt-4">
+                <Text className="mt-4 text-black">
                   {bookingDetails.location.substring(0, 20)}
                 </Text>
-                <Text className="mt-4 uppercase">
+                <Text className="mt-4 uppercase text-black">
                   {bookingDetails.postCode}
                 </Text>
-                <Text className="mt-4">{refferenceId}</Text>
+                <Text className="mt-4 text-black">{refferenceId}</Text>
               </View>
             </View>
-            <Text className="mt-5 text-1xl">Promo Code</Text>
+            <Text className="mt-5 text-1xl text-black">Promo Code</Text>
             <View className="mt-3 flex-row justify-between items-center">
               <View className="w-60">
                 <TextInput
@@ -248,20 +248,20 @@ const Summary = ({route}) => {
             <Text className="mt-3 text-[#00BCD4]">{promocodeLabel}</Text>
             <View className="flex-row mt-5 p-10 justify-between bg-[#F6FBFF]">
               <View>
-                <Text className="color-[#707070] text-lg">Full Service</Text>
+                <Text className="color-[#000000] text-lg">Full Service</Text>
                 {checkPromoCode && (
                   <Text className="text-[#00BCD4] text-lg mt-4">Promo</Text>
                 )}
-                <Text className="color-[#707070] text-lg mt-4">Total</Text>
+                <Text className="color-[#000000] text-lg mt-4">Total</Text>
               </View>
               <View>
-                <Text className="text-lg">£{data.price}</Text>
+                <Text className="text-lg text-black">£{data.price}</Text>
                 {checkPromoCode && (
                   <Text className="text-lg text-[#00BCD4] mt-4">
                     -£{promoCodePrice}
                   </Text>
                 )}
-                <Text className="text-lg mt-4">
+                <Text className="text-lg mt-4 text-black">
                   £{checkPromoCode ? discountPrice : data.price}
                 </Text>
               </View>

@@ -87,14 +87,14 @@ const SelectService = () => {
     <SafeAreaView className="bg-white">
       <View className="p-4 bg-white h-full">
         <View className="flex-row items-center px-4">
-          <Text onPress={handlePrevios}>
+          <Text className="text-black" onPress={handlePrevios}>
             <Image source={back} />
           </Text>
-          <Text className="text-2xl ml-10 text-center">
+          <Text className="text-2xl ml-10 text-center text-black">
             Select your service
           </Text>
         </View>
-        <Text className="mt-3 ml-5 text-gray-600">
+        <Text className="mt-3 ml-5 text-gray-600 text-black ">
           Please select the type of service you would like
         </Text>
         {isLoading && <ActivityIndicator size="large" color="#0B646B" />}
@@ -109,17 +109,19 @@ const SelectService = () => {
                   : 'flex-row justify-between p-4 mt-4 bg-[#F6FBFF] items-center'
               }>
               <View>
-                <Text className="text-lg mb-2">{item.serviceName}</Text>
+                <Text className="text-lg mb-2 text-black">
+                  {item.serviceName}
+                </Text>
                 {item.allService.map(services => (
                   <View key={services} className="flex-row">
                     {/* <MaterialIcons name="done" size={17} color="black" /> */}
-                    <Text className="text-[#707070] ml-1">{services}</Text>
+                    <Text className="text-[#000000] ml-1">{services}</Text>
                   </View>
                 ))}
               </View>
               <View>
-                <Text className="text-2xl">£{item.price}</Text>
-                <Text className="text-[#707070]">{item.time}</Text>
+                <Text className="text-2xl text-black">£{item.price}</Text>
+                <Text className="text-[#000000]">{item.time}</Text>
               </View>
             </TouchableOpacity>
           ))}

@@ -229,7 +229,6 @@ const FirstScreenStack = () => {
                 <View
                   style={{
                     flexDirection: 'row',
-                    marginTop: 40,
                     backgroundColor: 'white',
                   }}>
                   <TouchableOpacity
@@ -366,7 +365,7 @@ function Mydrawer() {
                 textAlign: 'center',
                 fontWeight: '900',
               }}>
-              SLASHEROO
+              SPLASHEROO
             </Text>
             <DrawerContentScrollView>
               <DrawerItem

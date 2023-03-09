@@ -174,7 +174,6 @@ const MainStackNavigator = () => {
                 <View
                   style={{
                     flexDirection: 'row',
-                    marginTop: 40,
                     backgroundColor: 'white',
                   }}>
                   <TouchableOpacity

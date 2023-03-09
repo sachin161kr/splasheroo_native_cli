@@ -73,25 +73,20 @@ const ConfirmLocationScreen = () => {
         <SafeAreaView className="h-full w-full bg-white">
           <ScrollView>
             <View className="px-4">
-              <View className="flex-row items-center">
-                <Text onPress={handlePrevios}>
-                  {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
-                </Text>
-                {/* <Text className="text-2xl ml-20 text-center">
-                  Confirm Location
-                </Text> */}
-              </View>
               <Text style={styles.text}>
                 Please let us know your exact address so we can collect the key!
               </Text>
-              <View>
+              <View className="self-center">
                 <View className="px-4 mt-5">
-                  <Text className="mt-5 text-[17px]">Enter Post Code</Text>
-                  <View className="mt-3 flex-row justify-between items-center">
+                  <Text className="mt-5 text-[17px] text-black">
+                    Enter Post Code
+                  </Text>
+                  <View className="flex-row justify-between items-center">
                     <View className="w-60">
                       <TextInput
                         mode="outlined"
                         label="Post Code"
+                        textColor="#000"
                         className="bg-slate-100"
                         value={addPostCode}
                         placeholder="Enter Post Code"
@@ -103,27 +98,11 @@ const ConfirmLocationScreen = () => {
                         className="relative bottom-0 bg-[#00BCD4] border-none py-4 px-5 h-100 w-100 mt-1 ml-1"
                         mode="contained"
                         onPress={handleSearch}>
-                        <Text>Search</Text>
+                        <Text className="text-white">Search</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
                   <View className="mt-5 w-full">
-                    {/* <TextInput
-                    type="number"
-                    label=""
-                    disabled
-                    multiline
-                    value={getAddress.toString()}
-                    mode="outlined"
-                    className="bg-slate-100 h-90"
-                /> */}
-                    {/* <SelectList
-                    setSelected={(address) => { 
-                        setFormData({...formData,address})
-                    }}
-                    data={data}
-                    save="value"
-                />  */}
                     <SelectList
                       setSelected={addr => handleSelect(addr)}
                       data={getAddress}

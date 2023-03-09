@@ -139,6 +139,10 @@ const StepForm = () => {
   };
 
   const handlePrevios = () => {
+    if (selectScreen == 0) {
+      navigation.navigate('Signup');
+      return;
+    }
     setSelectScreen(selectScreen - 1);
     setProgressValue(progressValue - 0.2);
   };
@@ -202,17 +206,19 @@ const StepForm = () => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView className="px-4 mt-5 h-full w-full relative">
         <View className="flex-row px-4 items-center">
-          {selectScreen > 0 && (
+          {selectScreen >= 0 && (
             <Text onPress={handlePrevios}>
-              {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
               <Image source={back} />
             </Text>
           )}
           <Text
+            style={{
+              color: '#000',
+            }}
             className={
               selectScreen > 0
                 ? 'text-lg ml-20 text-center'
-                : 'text-lg ml-20 px-9'
+                : 'text-lg ml-10 px-9'
             }>
             Create Account
           </Text>
@@ -221,14 +227,14 @@ const StepForm = () => {
           <ProgressBar progress={progressValue} color="#00BCD4" />
         </View>
         <View>
-          <Text className="text-center mt-2 color-[#5E5E5E]">
+          <Text className="text-center mt-2 color-[#000]">
             {formTitles[selectScreen]}
           </Text>
         </View>
 
         <View>{screenDisplay()}</View>
 
-        <View className="absolute w-full bottom-24 px-4 text-white">
+        <View className="absolute w-full left-4 bottom-24 px-4 text-white">
           {selectScreen < 5 ? (
             <Button
               className="bg-[#00BCD4]"
