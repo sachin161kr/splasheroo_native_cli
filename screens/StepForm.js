@@ -6,6 +6,7 @@ import {
   Keyboard,
   Image,
   BackHandler,
+  ScrollView,
 } from 'react-native';
 import React, {useEffect, useLayoutEffect, useState, useContext} from 'react';
 import {
@@ -81,7 +82,14 @@ const StepForm = () => {
 
   const ConfirmationWindow = () => {
     return (
-      <View className="px-4 mt-5">
+      <View
+        style={{
+          marginLeft: 15,
+          marginTop: 20,
+          // borderWidth: 1,
+          // borderColor: '#000',
+          width: 250,
+        }}>
         <CheckBox
           onPress={() => setTermsChecked(!termsChecked)}
           title="I accept the Terms & Conditions and Privacy Policy"
@@ -203,58 +211,69 @@ const StepForm = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <SafeAreaView className="px-4 mt-5 h-full w-full relative">
-        <View className="flex-row px-4 items-center">
-          {selectScreen >= 0 && (
-            <Text onPress={handlePrevios}>
-              <Image source={back} />
+    <ScrollView>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <SafeAreaView className="px-4 mt-5 h-full w-full relative">
+          <View className="flex-row px-4 items-center">
+            {selectScreen >= 0 && (
+              <Text onPress={handlePrevios}>
+                <Image source={back} />
+              </Text>
+            )}
+            <Text
+              style={{
+                color: '#000',
+              }}
+              className={
+                selectScreen > 0
+                  ? 'text-lg ml-20 text-center'
+                  : 'text-lg ml-10 px-9'
+              }>
+              Create Account
             </Text>
-          )}
-          <Text
+          </View>
+          <View className="mt-5 px-4">
+            <ProgressBar progress={progressValue} color="#00BCD4" />
+          </View>
+          <View>
+            <Text className="text-center mt-2 color-[#000]">
+              {formTitles[selectScreen]}
+            </Text>
+          </View>
+
+          <View>{screenDisplay()}</View>
+
+          <View
+            className="w-full px-4 text-white"
             style={{
-              color: '#000',
-            }}
-            className={
-              selectScreen > 0
-                ? 'text-lg ml-20 text-center'
-                : 'text-lg ml-10 px-9'
-            }>
-            Create Account
-          </Text>
-        </View>
-        <View className="mt-5 px-4">
-          <ProgressBar progress={progressValue} color="#00BCD4" />
-        </View>
-        <View>
-          <Text className="text-center mt-2 color-[#000]">
-            {formTitles[selectScreen]}
-          </Text>
-        </View>
-
-        <View>{screenDisplay()}</View>
-
-        <View className="absolute w-full left-4 bottom-24 px-4 text-white">
-          {selectScreen < 5 ? (
-            <Button
-              className="bg-[#00BCD4]"
-              disabled={buttonDisabled}
-              mode="contained"
-              onPress={handleNext}>
-              Next
-            </Button>
-          ) : (
-            <Button
-              className="bg-[#00BCD4]"
-              disabled={!(termsChecked && drivingCheck)}
-              mode="contained"
-              onPress={handleSubmit}>
-              Submit
-            </Button>
-          )}
-        </View>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+              marginTop: 300,
+            }}>
+            {selectScreen < 5 ? (
+              <View>
+                <Button
+                  className="bg-[#00BCD4]"
+                  style={{
+                    width: '100%',
+                  }}
+                  disabled={buttonDisabled}
+                  mode="contained"
+                  onPress={handleNext}>
+                  Next
+                </Button>
+              </View>
+            ) : (
+              <Button
+                className="bg-[#00BCD4]"
+                disabled={!(termsChecked && drivingCheck)}
+                mode="contained"
+                onPress={handleSubmit}>
+                Submit
+              </Button>
+            )}
+          </View>
+        </SafeAreaView>
+      </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };
 

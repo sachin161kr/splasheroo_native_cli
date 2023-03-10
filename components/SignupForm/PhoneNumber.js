@@ -5,7 +5,7 @@ import {ProgressBar, MD3Colors, TextInput, Button} from 'react-native-paper';
 const PhoneNumber = ({formData, setFormData, error, setError}) => {
   const handleChange = phoneNumber => {
     setFormData({...formData, phoneNumber});
-    if (phoneNumber.length > 10) {
+    if (phoneNumber.length >= 10) {
       setError(false);
       setError({...error, phoneError: false});
     } else {

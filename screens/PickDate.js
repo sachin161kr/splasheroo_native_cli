@@ -110,7 +110,7 @@ const PickDate = () => {
           width={360}
         />
       </View>
-      <Text className="text-center mt-3">
+      <Text className="text-center mt-3 text-black">
         {moment(selectedDate).format('DD-MM-YYYY')}
       </Text>
       {isLoading ? (
