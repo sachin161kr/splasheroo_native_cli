@@ -42,7 +42,6 @@ const Summary = ({route}) => {
   const [promoCodePrice, setPromoCodePrice] = useState();
   const [refferenceId, setRefferenceId] = useState('');
   const [cardDetailAvailable, setCardDetailAvailable] = useState(false);
-  const [cardDetails, setCardDetails] = useState({});
   const [discountPrice, setDiscountPrice] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const {promocode} = bookingDetails;
@@ -72,7 +71,6 @@ const Summary = ({route}) => {
       .then(response => {
         if (response.data.success) {
           setCardDetailAvailable(true);
-          setCardDetails(response.data);
         } else {
           setCardDetailAvailable(false);
         }
@@ -115,6 +113,7 @@ const Summary = ({route}) => {
     axios
       .request(options)
       .then(response => {
+        console.log(response)
         if (response.data.success) {
           const cardData = {
             serviceId: bookingDetails.service,
@@ -123,7 +122,6 @@ const Summary = ({route}) => {
           };
           const selectDetails = {
             ...cardData,
-            cardDetails,
             userId,
           };
           if (cardDetailAvailable) {
@@ -203,7 +201,7 @@ const Summary = ({route}) => {
                 <Text className="mt-4 color-[#000000]">Date & Time</Text>
                 <Text className="mt-4 color-[#000000]">Duration</Text>
                 <Text className="mt-4 color-[#000000]">Address</Text>
-                <Text className="mt-4 color-[#000000]">Pincode</Text>
+                <Text className="mt-4 color-[#000000]">Post Code</Text>
                 <Text className="mt-4 color-[#000000]">Reference</Text>
               </View>
               <View>

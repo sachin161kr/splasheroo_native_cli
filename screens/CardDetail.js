@@ -102,6 +102,7 @@ const CardDetail = ({route}) => {
               id_customer: userId,
               amount: data.total,
               id_service: data.serviceId,
+              stripe_customer_id:response?.data?.bankCard?.stripeCustomerId
             },
           };
 
@@ -114,6 +115,7 @@ const CardDetail = ({route}) => {
               }
             })
             .catch(error => {
+              setIsLoading(false);
               console.error(error);
             });
         }
@@ -151,7 +153,7 @@ const CardDetail = ({route}) => {
                         <Ionicons name="arrow-back" size={24} color="black" />
                     </Text> */}
           <Text className="text-2xl mt-3 text-center text-black">
-            Card Details
+            Add Card Details
           </Text>
         </View>
         <View className="flex-row items-center px-4 mt-0"></View>

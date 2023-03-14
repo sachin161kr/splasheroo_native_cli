@@ -9,6 +9,7 @@ export const AuthProvider = ({children}) => {
     const [signupData,setSignupData] = useState();
     const [renderFetchData,setRenderFetchData] = useState(false);
     const [renderBookingInfo,setRenderBookingInfo] = useState(1);
+    const [renderCardInfo,setRenderCardInfo] = useState(1);
     const [bookingDetails,setBookingDetails] = useState({
         latitude:"",
         longitude:"",
@@ -35,7 +36,9 @@ export const AuthProvider = ({children}) => {
             renderFetchData,
             setRenderFetchData,
             renderBookingInfo,
-            setRenderBookingInfo
+            setRenderBookingInfo,
+            renderCardInfo,
+            setRenderCardInfo
         }}>
             {children}
         </AuthContext.Provider>

@@ -75,6 +75,7 @@ const Drawer = createDrawerNavigator();
 
 import {DrawerActions} from '@react-navigation/native';
 import AddHomeVehicle from '../screens/AddHomeVehicle';
+import AddCard from '../screens/AddCard';
 
 const FirstScreenStack = () => {
   const navigation = useNavigation();
@@ -230,6 +231,7 @@ const FirstScreenStack = () => {
                   style={{
                     flexDirection: 'row',
                     backgroundColor: 'white',
+                    //marginTop:40 //for ios
                   }}>
                   <TouchableOpacity
                     onPress={() => {
@@ -270,6 +272,7 @@ const FirstScreenStack = () => {
       <Stack.Screen name="SelectService" component={SelectService} />
       <Stack.Screen name="summary" component={Summary} />
       <Stack.Screen name="cardDetail" component={CardDetail} />
+      <Stack.Screen name="addCard" component={AddCard} />
       <Stack.Screen name="selectCard" component={SelectCard} />
       <Stack.Screen
         name="SuccessBooking"

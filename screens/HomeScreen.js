@@ -52,7 +52,7 @@ const HomeScreen = () => {
     const value = await AsyncStorage.getItem('userId');
     const options = {
       method: 'GET',
-      url: `https://splasheroo-backend.herokuapp.com/api/booking/latest/${value}`,
+      url:   `https://splasheroo-backend.herokuapp.com/api/booking/updated/${value}`,
       params: {},
       headers: {
         'content-type': 'application/json',

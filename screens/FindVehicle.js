@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import {View, Text, SafeAreaView, Image, TouchableOpacity, Alert} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import {Banner} from '../assets';
@@ -41,6 +41,7 @@ const FindVehicle = () => {
         console.log(response.data);
       })
       .catch(error => {
+        Alert.alert('Please add the correct one!');
         console.error(error);
       });
   };
