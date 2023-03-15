@@ -246,7 +246,7 @@ const StepForm = () => {
           <View
             className="w-full px-4 text-white"
             style={{
-              marginTop: 300,
+              marginTop: 350,
             }}>
             {selectScreen < 5 ? (
               <View>

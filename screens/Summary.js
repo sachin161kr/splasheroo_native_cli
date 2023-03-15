@@ -113,7 +113,7 @@ const Summary = ({route}) => {
     axios
       .request(options)
       .then(response => {
-        console.log(response)
+        console.log(response);
         if (response.data.success) {
           const cardData = {
             serviceId: bookingDetails.service,
@@ -264,7 +264,7 @@ const Summary = ({route}) => {
                 </Text>
               </View>
             </View>
-            <View className="relative mt-20 px-4 w-full text-white">
+            <View className="relative mb-3 mt-20 px-4 w-full text-white">
               {isLoading ? (
                 <ActivityIndicator size="large" color="#0B646B" />
               ) : (
